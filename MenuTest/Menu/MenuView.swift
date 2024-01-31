@@ -60,6 +60,10 @@ public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
 		
 		super.init(frame: .zero)
 		
+		self.layer.borderColor = UIColor.red.cgColor
+		self.layer.borderWidth = 1
+		
+		self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
 		self.titleLabel.text = title
 		self.titleLabel.textColor = theme.darkTintColor
 		self.titleLabel.textAlignment = .center
@@ -70,48 +74,65 @@ public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
 		
 		self.addSubview(clippingView)
 		
-		clippingView.snp.makeConstraints {
-			make in
-			
+		/*clippingView.snp.makeConstraints { make in
 			make.edges.equalToSuperview()
-		}
+		}*/
+		clippingView.translatesAutoresizingMaskIntoConstraints = false
+		clippingView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+		clippingView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+		clippingView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+		clippingView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
 		
 		clippingView.layer.cornerRadius = 8.0
 		
-		clippingView.addSubview(effectView)
+		self.effectView.translatesAutoresizingMaskIntoConstraints = false
+		clippingView.addSubview(self.effectView)
 		
-		self.effectView.snp.makeConstraints {
-			make in
-			
+		/*self.effectView.snp.makeConstraints({ make in
 			make.edges.equalToSuperview()
-		}
+		})*/
+		self.effectView.topAnchor.constraint(equalTo: clippingView.topAnchor).isActive = true
+		self.effectView.bottomAnchor.constraint(equalTo: clippingView.bottomAnchor).isActive = true
+		self.effectView.rightAnchor.constraint(equalTo: clippingView.rightAnchor).isActive = true
+		self.effectView.leftAnchor.constraint(equalTo: clippingView.leftAnchor).isActive = true
 		
 		self.effectView.contentView.addSubview(self.tintView)
 		self.effectView.contentView.addSubview(self.titleLabel)
 		self.effectView.contentView.addSubview(self.gestureBarView)
 		
-		self.tintView.snp.makeConstraints {
-			make in
-			
-			make.edges.equalToSuperview()
-		}
+		let effectViewContentView = self.effectView
+		//effectViewContentView.translatesAutoresizingMaskIntoConstraints = false
 		
-		self.titleLabel.snp.makeConstraints {
-			make in
-			
+		/*self.tintView.snp.makeConstraints { make in
+			make.edges.equalToSuperview()
+		}*/
+		self.tintView.translatesAutoresizingMaskIntoConstraints = false
+		self.tintView.topAnchor.constraint(equalTo: effectViewContentView.topAnchor).isActive = true
+		self.tintView.bottomAnchor.constraint(equalTo: effectViewContentView.bottomAnchor).isActive = true
+		self.tintView.rightAnchor.constraint(equalTo: effectViewContentView.rightAnchor).isActive = true
+		self.tintView.leftAnchor.constraint(equalTo: effectViewContentView.leftAnchor).isActive = true
+		
+		/*self.titleLabel.snp.makeConstraints { make in
 			make.left.right.equalToSuperview().inset(12)
 			make.centerY.equalToSuperview()
-		}
+		}*/
+		self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
+		self.titleLabel.leftAnchor.constraint(equalTo: effectViewContentView.leftAnchor, constant: 12).isActive = true
+		self.titleLabel.rightAnchor.constraint(equalTo: effectViewContentView.rightAnchor, constant: 12).isActive = true
+		self.titleLabel.centerYAnchor.constraint(equalTo: effectViewContentView.centerYAnchor).isActive = true
 		
 		self.gestureBarView.layer.cornerRadius = 1.0
-		self.gestureBarView.snp.makeConstraints {
-			make in
-			
-			make.centerX.equalToSuperview()
-			make.height.equalTo(2)
-			make.width.equalTo(20)
-			make.bottom.equalToSuperview().inset(3)
-		}
+		
+		//make.centerX.equalToSuperview()
+		//make.height.equalTo(2)
+		//make.width.equalTo(20)
+		//make.bottom.equalToSuperview().inset(3)
+		self.gestureBarView.translatesAutoresizingMaskIntoConstraints = false
+		self.gestureBarView.centerXAnchor.constraint(equalTo: effectViewContentView.centerXAnchor).isActive = true
+		self.gestureBarView.heightAnchor.constraint(equalToConstant: 2).isActive = true
+		self.gestureBarView.widthAnchor.constraint(equalToConstant: 20).isActive = true
+		self.gestureBarView.bottomAnchor.constraint(equalTo: effectViewContentView.bottomAnchor, constant: 3).isActive = true
+		
 		
 		self.longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressGesture(_:)))
 		self.longPress.minimumPressDuration = 0.0
@@ -124,10 +145,12 @@ public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
 		
 		self.applyTheme(theme)
 		
-		self.menuPresentationObserver = NotificationCenter.default.addObserver(forName: MenuView.menuWillPresent, object: nil, queue: nil) {
-			[weak self] notification in
+		self.menuPresentationObserver = NotificationCenter.default.addObserver(forName: MenuView.menuWillPresent, object: nil, queue: nil) { [weak self] notification in
 			
-			if let poster = notification.object as? MenuView, let this = self, poster !== this {
+			if let poster = notification.object as? MenuView,
+			   let this = self,
+			   poster !== this
+			{
 				self?.hideContents(animated: false)
 			}
 		}
@@ -149,7 +172,7 @@ public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
 	
 	@objc private func longPressGesture(_ sender: UILongPressGestureRecognizer) {
 		
-		//Highlight whatever we can
+		// Highlight whatever we can
 		if let contents = self.contents {
 			let localPoint = sender.location(in: self)
 			let contentsPoint = convert(localPoint, to: contents)
@@ -164,11 +187,13 @@ public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
 				if !self.isShowingContents {
 					self.gestureStart = Date()
 					self.showContents()
-				} else {
+				}
+				else {
 					self.gestureStart = .distantPast
 				}
 				
 				self.contents?.isInteractiveDragActive = true
+				
 			case .cancelled:
 				fallthrough
 			case .ended:
@@ -194,8 +219,7 @@ public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
 			let point = self.convert(gesture.location(in: self), to: contents)
 			
 			if contents.point(inside: point, with: nil) {
-				contents.selectPosition(point, completion: {
-					[weak self] menuItem in
+				contents.selectPosition(point, completion: { [weak self] menuItem in
 					
 					self?.hideContents(animated: true)
 					
@@ -219,13 +243,12 @@ public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
 		NotificationCenter.default.post(name: MenuView.menuWillPresent, object: self)
 		
 		let contents = MenuContents(name: self.title, items: self.itemsSource(), theme: self.theme)
+		contents.translatesAutoresizingMaskIntoConstraints = false
 		
 		for view in contents.stackView.arrangedSubviews {
 			if let view = view as? MenuItemView {
 				var updatableView = view
-				updatableView.updateLayout = {
-					[weak self] in
-					
+				updatableView.updateLayout = { [weak self] in
 					self?.relayoutContents()
 				}
 			}
@@ -233,18 +256,34 @@ public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
 		
 		self.addSubview(contents)
 		
-		contents.snp.makeConstraints {
-			make in
-			
-			switch contentAlignment {
+		contents.translatesAutoresizingMaskIntoConstraints = false
+		
+		switch self.contentAlignment {
+			case .left:
+				contents.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+				contents.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+				
+			case .center:
+				contents.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+				contents.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+				
+			case .right:
+				contents.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+				contents.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+		}
+		
+		/*contents.snp.makeConstraints({ make in
+			switch self.contentAlignment {
 				case .left:
 					make.top.right.equalToSuperview()
+				
 				case .right:
 					make.top.left.equalToSuperview()
+					
 				case .center:
 					make.top.centerX.equalToSuperview()
 			}
-		}
+		})*/
         
 		self.effectView.isHidden = true
         
@@ -259,8 +298,7 @@ public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
         contents.focusInitialViewIfNecessary()
         
 		self.feedback.prepare()
-        contents.highlightChanged = {
-            [weak self] in
+        contents.highlightChanged = { [weak self] in
             
             self?.feedback.selectionChanged()
         }
@@ -277,11 +315,11 @@ public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
         if animated {
             UIView.animate(withDuration: 0.2, animations: {
                 contentsView?.alpha = 0.0
-            }) {
-                finished in
+            }, completion: { finished in
                 contentsView?.removeFromSuperview()
-            }
-        } else {
+            })
+        }
+		else {
             contentsView?.removeFromSuperview()
         }
     }
@@ -333,7 +371,15 @@ public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
         
         return super.hitTest(point, with: event)
     }
-    
+	
+	
+	// MARK: - Layout
+	
+//	public override func layoutSubviews() {
+//		super.layoutSubviews()
+//	}
+	
+	
     // MARK: - Theming
     
     public func applyTheme(_ theme: MenuTheme) {

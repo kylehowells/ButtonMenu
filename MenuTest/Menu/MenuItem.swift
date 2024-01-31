@@ -16,13 +16,16 @@ public protocol MenuItem {
 	func performAction()
 }
 
+
+// MARK: - SeparatorMenuItem
+
 public struct SeparatorMenuItem: Equatable, MenuItem {
 	
 	public var view: MenuItem.MenuViewType {
 		return SeparatorMenuItemView()
 	}
 	
-	public init() {}
+	public init() { }
 	
 	public static func == (lhs: SeparatorMenuItem, rhs: SeparatorMenuItem) -> Bool {
 		return true
@@ -31,29 +34,35 @@ public struct SeparatorMenuItem: Equatable, MenuItem {
 	public func performAction() {}
 }
 
+
+// MARK: - UIKeyModifierFlags
+
 public extension UIKeyModifierFlags {
 	var symbols: [String] {
 		var result: [String] = []
 		
-		if contains(.alternate) {
+		if self.contains(.alternate) {
 			result.append("⌥")
 		}
 		
-		if contains(.control) {
+		if self.contains(.control) {
 			result.append("⌃")
 		}
 		
-		if contains(.shift) {
+		if self.contains(.shift) {
 			result.append("⇧")
 		}
 		
-		if contains(.command) {
+		if self.contains(.command) {
 			result.append("⌘")
 		}
 		
 		return result
 	}
 }
+
+
+// MARK: - ShortcutMenuItem
 
 public struct ShortcutMenuItem: Equatable, MenuItem {
 	

@@ -80,6 +80,137 @@ class MenuContents: UIView {
 		}
 	}
 	
+	
+	init(name: String, items: [MenuItem], theme: MenuTheme, maxHeight: CGFloat = 300, radius: CGFloat = 8.0) {
+		
+		let itemViews: [MenuViewType] = items.map({
+			let item = $0.view
+			item.applyTheme(theme)
+			return item
+		})
+		
+		self.stackView = UIStackView(arrangedSubviews: itemViews)
+		
+		self.maxHeight = maxHeight
+		self.items = items
+		self.radius = radius
+		
+		super.init(frame: .zero)
+		
+		self.layer.borderColor = UIColor.yellow.cgColor
+		self.layer.borderWidth = 1
+		
+		self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
+		self.titleLabel.text = name
+		
+		self.titleLabel.layer.borderColor = UIColor.red.cgColor
+		self.titleLabel.layer.borderWidth = 1
+		
+		self.addSubview(self.shadowView)
+		
+		/*self.shadowView.snp.makeConstraints({ make in
+		 make.edges.equalToSuperview().inset(-20)
+		 })*/
+		self.shadowView.translatesAutoresizingMaskIntoConstraints = false
+		self.shadowView.topAnchor.constraint(equalTo: self.topAnchor, constant: -20).isActive = true
+		self.shadowView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20).isActive = true
+		self.shadowView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: -20).isActive = true
+		self.shadowView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20).isActive = true
+		
+		self.shadowView.layer.borderColor = UIColor.brown.cgColor
+		self.shadowView.layer.borderWidth = 1
+		
+		self.addSubview(self.effectView)
+		
+		/*self.effectView.snp.makeConstraints({ make in
+		 make.edges.equalToSuperview()
+		 })*/
+		self.effectView.translatesAutoresizingMaskIntoConstraints = false
+		self.effectView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+		self.effectView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+		self.effectView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+		self.effectView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+		
+		self.effectView.layer.borderColor = UIColor.green.cgColor
+		self.effectView.layer.borderWidth = 1
+		
+		//effectViewContentView.translatesAutoresizingMaskIntoConstraints = false
+		
+		self.effectView.contentView.addSubview(self.tintView)
+		self.effectView.contentView.addSubview(self.titleLabel)
+		self.effectView.contentView.addSubview(self.scrollContainer)
+		
+		self.scrollContainer.addSubview(self.scrollView)
+		self.scrollView.addSubview(self.stackView)
+		
+		
+		let effectViewContentView = self.effectView
+		
+		/*self.scrollContainer.snp.makeConstraints({ make in
+		 make.edges.equalToSuperview()
+		 })*/
+		self.scrollContainer.translatesAutoresizingMaskIntoConstraints = false
+		self.scrollContainer.topAnchor.constraint(equalTo: effectViewContentView.topAnchor).isActive = true
+		self.scrollContainer.bottomAnchor.constraint(equalTo: effectViewContentView.bottomAnchor).isActive = true
+		self.scrollContainer.leftAnchor.constraint(equalTo: effectViewContentView.leftAnchor).isActive = true
+		self.scrollContainer.rightAnchor.constraint(equalTo: effectViewContentView.rightAnchor).isActive = true
+		
+		/*self.scrollView.snp.makeConstraints({ make in
+		 make.edges.equalToSuperview()
+		 make.height.equalTo(maxHeight)
+		 })*/
+		self.scrollView.translatesAutoresizingMaskIntoConstraints = false
+		self.scrollView.topAnchor.constraint(equalTo: self.scrollContainer.topAnchor).isActive = true
+		self.scrollView.bottomAnchor.constraint(equalTo: self.scrollContainer.bottomAnchor).isActive = true
+		self.scrollView.leftAnchor.constraint(equalTo: self.scrollContainer.leftAnchor).isActive = true
+		self.scrollView.rightAnchor.constraint(equalTo: self.scrollContainer.rightAnchor).isActive = true
+		self.scrollView.heightAnchor.constraint(equalToConstant: maxHeight).isActive = true
+		
+		/*self.tintView.snp.makeConstraints({ make in
+		 make.edges.equalToSuperview()
+		 })*/
+		self.tintView.translatesAutoresizingMaskIntoConstraints = false
+		self.tintView.topAnchor.constraint(equalTo: effectViewContentView.topAnchor).isActive = true
+		self.tintView.bottomAnchor.constraint(equalTo: effectViewContentView.bottomAnchor).isActive = true
+		self.tintView.leftAnchor.constraint(equalTo: effectViewContentView.leftAnchor).isActive = true
+		self.tintView.rightAnchor.constraint(equalTo: effectViewContentView.rightAnchor).isActive = true
+		
+		/*self.stackView.snp.makeConstraints({ make in
+		 make.top.bottom.equalToSuperview()
+		 
+		 if #available(iOS 11.0, *) {
+		 make.left.right.equalTo(self.scrollView.frameLayoutGuide)
+		 } else {
+		 make.left.right.equalTo(self)
+		 }
+		 })*/
+		self.stackView.translatesAutoresizingMaskIntoConstraints = false
+		self.stackView.topAnchor.constraint(equalTo: self.scrollView.topAnchor).isActive = true
+		self.stackView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor).isActive = true
+		
+		self.stackView.leftAnchor.constraint(equalTo: self.scrollView.frameLayoutGuide.leftAnchor).isActive = true
+		self.stackView.rightAnchor.constraint(equalTo: self.scrollView.frameLayoutGuide.rightAnchor).isActive = true
+		
+		self.stackView.axis = .vertical
+		self.stackView.alignment = .fill
+		self.stackView.distribution = .equalSpacing
+		self.stackView.spacing = 0
+		
+		self.stackView.layer.borderColor = UIColor.orange.cgColor
+		self.stackView.layer.borderWidth = 1
+		
+		self.menuItemViews.forEach({
+			var item = $0
+			
+			item.didHighlight = { [weak self] in
+				self?.highlightChanged()
+			}
+		})
+		
+		self.applyTheme(theme)
+	}
+	
+	
 	private var isScrollable: Bool {
 		return self.scrollView.contentSize.height > self.scrollView.bounds.size.height
 	}
@@ -103,11 +234,10 @@ class MenuContents: UIView {
 			view.highlightPosition = point
 		})
 		
-		let pointInsideBoundary = self.pointIsInsideTopEdgeScrollingBoundary(point) || self.pointIsInsideBottomEdgeScrollingBoundary(point)
+		let pointInsideBoundary: Bool = self.pointIsInsideTopEdgeScrollingBoundary(point) || self.pointIsInsideBottomEdgeScrollingBoundary(point)
 		
 		if pointInsideBoundary && self.edgeScrollTimer == nil && self.isInteractiveDragActive {
 			self.edgeScrollTimer = Timer.scheduledTimer(withTimeInterval: 0.016, repeats: true, block: { [weak self] _ in
-				
 				guard let self = self else {
 					return
 				}
@@ -149,101 +279,18 @@ class MenuContents: UIView {
 	func selectPosition(_ point: CGPoint, completion: @escaping (MenuItem) -> Void) {
 		self.menuItemViews.enumerated().forEach({ index, view in
 			
-			let point = self.convert(point, to: view)
+			let point: CGPoint = self.convert(point, to: view)
 			
             if view.point(inside: point, with: nil) {
-                view.startSelectionAnimation { [weak self] in
+                view.startSelectionAnimation(completion: { [weak self] in
 					if let self = self {
 						completion(self.items[index])
 					}
-				}
+				})
 			}
 		})
 	}
 	
-	init(name: String, items: [MenuItem], theme: MenuTheme, maxHeight: CGFloat = 300, radius: CGFloat = 8.0) {
-		
-		let itemViews: [MenuViewType] = items.map {
-			let item = $0.view
-			item.applyTheme(theme)
-			return item
-		}
-		
-		self.stackView = UIStackView(arrangedSubviews: itemViews)
-		
-		self.maxHeight = maxHeight
-		self.items = items
-		self.radius = radius
-		
-		super.init(frame: .zero)
-		
-		self.titleLabel.text = name
-		
-		self.addSubview(self.shadowView)
-		
-		self.shadowView.snp.makeConstraints {
-			make in
-			
-			make.edges.equalToSuperview().inset(-20)
-		}
-		
-		self.addSubview(self.effectView)
-		
-		self.effectView.snp.makeConstraints {
-            make in
-            
-            make.edges.equalToSuperview()
-        }
-        
-		self.effectView.contentView.addSubview(self.tintView)
-		self.effectView.contentView.addSubview(self.titleLabel)
-		self.effectView.contentView.addSubview(self.scrollContainer)
-        
-		self.scrollContainer.addSubview(self.scrollView)
-		self.scrollView.addSubview(self.stackView)
-        
-		self.scrollContainer.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
-		self.scrollView.snp.makeConstraints { make in
-            
-            make.edges.equalToSuperview()
-            make.height.equalTo(maxHeight)
-        }
-        
-		self.tintView.snp.makeConstraints { make in
-            
-            make.edges.equalToSuperview()
-        }
-        
-		self.stackView.snp.makeConstraints { make in
-            
-            make.top.bottom.equalToSuperview()
-			
-            if #available(iOS 11.0, *) {
-				make.left.right.equalTo(self.scrollView.frameLayoutGuide)
-            } else {
-                make.left.right.equalTo(self)
-            }
-        }
-        
-		self.stackView.axis = .vertical
-		self.stackView.alignment = .fill
-		self.stackView.distribution = .equalSpacing
-		self.stackView.spacing = 0
-        
-		self.menuItemViews.forEach {
-            var item = $0
-            
-            item.didHighlight = { [weak self] in
-                self?.highlightChanged()
-            }
-        }
-        
-		self.applyTheme(theme)
-    }
-    
 	private func computePath(withParentView view: UIView, alignment: MenuView.Alignment) -> UIBezierPath {
 		let localViewBounds: CGRect
 		let lowerRectCorners: UIRectCorner
@@ -252,9 +299,11 @@ class MenuContents: UIView {
 			case .center:
 				localViewBounds = view.bounds.offsetBy(dx: self.bounds.size.width/2.0 - view.bounds.size.width/2.0, dy: 0.0)
 				lowerRectCorners = .allCorners
+				
 			case .right:
 				localViewBounds = view.bounds
 				lowerRectCorners = [.topRight, .bottomLeft, .bottomRight]
+				
 			case .left:
 				localViewBounds = view.bounds.offsetBy(dx: self.bounds.size.width - view.bounds.size.width, dy: 0.0)
 				lowerRectCorners = [.topLeft, .bottomLeft, .bottomRight]
@@ -272,14 +321,32 @@ class MenuContents: UIView {
 			case .center:
 				midPath.move(to: CGPoint(x: localViewBounds.minX, y: localViewBounds.maxY))
 				midPath.addLine(to: CGPoint(x: localViewBounds.maxX, y: localViewBounds.maxY))
-				midPath.addArc(withCenter: CGPoint(x: localViewBounds.maxX + self.radius, y: localViewBounds.maxY), radius: self.radius, startAngle: .pi, endAngle: .pi/2.0, clockwise: false)
+				midPath.addArc(
+					withCenter: CGPoint(x: localViewBounds.maxX + self.radius, y: localViewBounds.maxY),
+					radius: self.radius,
+					startAngle: .pi,
+					endAngle: .pi/2.0,
+					clockwise: false
+				)
 				midPath.addLine(to: CGPoint(x: localViewBounds.minX - self.radius, y: localViewBounds.maxY + self.radius))
-				midPath.addArc(withCenter: CGPoint(x: localViewBounds.minX - self.radius, y: localViewBounds.maxY), radius: self.radius, startAngle: .pi/2.0, endAngle: 0.0, clockwise: false)
+				midPath.addArc(
+					withCenter: CGPoint(x: localViewBounds.minX - self.radius, y: localViewBounds.maxY),
+					radius: self.radius,
+					startAngle: .pi/2.0,
+					endAngle: 0.0,
+					clockwise: false
+				)
 				
 			case .right:
 				midPath.move(to: CGPoint(x: localViewBounds.minX, y: localViewBounds.maxY))
 				midPath.addLine(to: CGPoint(x: localViewBounds.maxX, y: localViewBounds.maxY))
-				midPath.addArc(withCenter: CGPoint(x: localViewBounds.maxX + self.radius, y: localViewBounds.maxY), radius: self.radius, startAngle: .pi, endAngle: .pi/2.0, clockwise: false)
+				midPath.addArc(
+					withCenter: CGPoint(x: localViewBounds.maxX + self.radius, y: localViewBounds.maxY),
+					radius: self.radius,
+					startAngle: .pi,
+					endAngle: .pi/2.0,
+					clockwise: false
+				)
 				midPath.addLine(to: CGPoint(x: localViewBounds.minX, y: localViewBounds.maxY + self.radius))
 				
 			case .left:
@@ -287,12 +354,19 @@ class MenuContents: UIView {
 				midPath.addLine(to: CGPoint(x: localViewBounds.maxX, y: localViewBounds.maxY))
 				midPath.addLine(to: CGPoint(x: localViewBounds.maxX, y: localViewBounds.maxY + self.radius))
 				midPath.addLine(to: CGPoint(x: localViewBounds.minX - self.radius, y: localViewBounds.maxY + self.radius))
-				midPath.addArc(withCenter: CGPoint(x: localViewBounds.minX - self.radius, y: localViewBounds.maxY), radius: self.radius, startAngle: .pi/2.0, endAngle: 0.0, clockwise: false)
+				midPath.addArc(
+					withCenter: CGPoint(x: localViewBounds.minX - self.radius, y: localViewBounds.maxY),
+					radius: self.radius,
+					startAngle: .pi/2.0,
+					endAngle: 0.0,
+					clockwise: false
+				)
 		}
 		
 		midPath.close()
 		
 		let yOffset: CGFloat = localViewBounds.maxY + self.radius
+		
 		let bottomPath = UIBezierPath(
 			roundedRect: CGRect(x: 0, y: yOffset, width: self.bounds.size.width, height: self.bounds.size.height - yOffset),
 			byRoundingCorners: lowerRectCorners,
@@ -306,7 +380,7 @@ class MenuContents: UIView {
 	}
 	
 	func pointInsideMenuShape(_ point: CGPoint) -> Bool {
-		let contentsPoint = convert(point, to: self.scrollContainer)
+		let contentsPoint: CGPoint = convert(point, to: self.scrollContainer)
 		
 		return self.scrollContainer.bounds.contains(contentsPoint)
 	}
@@ -314,35 +388,68 @@ class MenuContents: UIView {
 	override func didMoveToSuperview() {
 		super.didMoveToSuperview()
 		
-		guard let superview = self.superview else {
+		guard let superview: UIView = self.superview else {
 			return
 		}
 		
 		// We're rendering under the superview, so let's do that
-		self.titleLabel.snp.remakeConstraints {
-			make in
-			
+		/*self.titleLabel.snp.remakeConstraints({ make in
 			make.center.equalTo(superview)
-		}
+		})*/
+		self.titleLabel.centerXAnchor.constraint(equalTo: superview.centerXAnchor).isActive = true
+		self.titleLabel.centerYAnchor.constraint(equalTo: superview.centerYAnchor).isActive = true
 		
-		self.scrollView.scrollIndicatorInsets = UIEdgeInsets(top: self.radius + 6, left: 0, bottom: 6, right: 0)
-		self.scrollView.contentInset = UIEdgeInsets(top: self.radius + 6, left: 0, bottom: 6, right: 0)
+		self.scrollView.scrollIndicatorInsets = UIEdgeInsets(
+			top: self.radius + 6,
+			left: 0,
+			bottom: 6,
+			right: 0
+		)
 		
-		let insetAdjustment = self.scrollView.contentInset.top + self.scrollView.contentInset.bottom
+		self.scrollView.contentInset = UIEdgeInsets(
+			top: self.radius + 6,
+			left: 0,
+			bottom: 6,
+			right: 0
+		)
 		
-		self.scrollContainer.snp.remakeConstraints { make in
+		let insetAdjustment: CGFloat = self.scrollView.contentInset.top + self.scrollView.contentInset.bottom
+		
+		let effectViewContentView = self.effectView.contentView
+		
+		/*self.scrollContainer.snp.remakeConstraints({ make in
 			make.left.bottom.right.equalToSuperview()
 			make.top.equalTo(superview.snp.bottom)
-		}
+		})*/
+		self.scrollContainer.leftAnchor.constraint(equalTo: effectViewContentView.leftAnchor).isActive = true
+		self.scrollContainer.bottomAnchor.constraint(equalTo: effectViewContentView.bottomAnchor).isActive = true
+		self.scrollContainer.rightAnchor.constraint(equalTo: effectViewContentView.rightAnchor).isActive = true
+		self.scrollContainer.topAnchor.constraint(equalTo: superview.bottomAnchor).isActive = true
 		
-		self.scrollView.snp.remakeConstraints { make in
-			
+		/*self.scrollView.snp.remakeConstraints({ make in
 			make.width.greaterThanOrEqualTo(superview.snp.width).offset(100)
 			make.bottom.equalToSuperview()
+			
 			make.height.equalTo(self.stackView).offset(insetAdjustment).priority(.low)
 			make.height.lessThanOrEqualTo(self.maxHeight).priority(.required)
+			
 			make.top.left.right.equalToSuperview()
-		}
+		})*/
+		let scrollViewSuperview = self.scrollContainer
+		self.scrollView.widthAnchor.constraint(greaterThanOrEqualTo: superview.widthAnchor, constant: 100).isActive = true
+		self.scrollView.bottomAnchor.constraint(equalTo: scrollViewSuperview.bottomAnchor).isActive = true
+		
+		let heightEquals = self.scrollView.heightAnchor.constraint(equalTo: self.stackView.heightAnchor, constant: insetAdjustment)
+		heightEquals.priority = .defaultLow
+		heightEquals.isActive = true
+		
+		let heightLessThan = self.scrollView.heightAnchor.constraint(lessThanOrEqualToConstant: self.maxHeight)
+		heightLessThan.priority = .required
+		heightLessThan.isActive = true
+		
+		self.scrollView.topAnchor.constraint(equalTo: scrollViewSuperview.topAnchor).isActive = true
+		self.scrollView.leftAnchor.constraint(equalTo: scrollViewSuperview.leftAnchor).isActive = true
+		self.scrollView.rightAnchor.constraint(equalTo: scrollViewSuperview.rightAnchor).isActive = true
 		
 		self.applyContentMask()
 	}
@@ -358,12 +465,11 @@ class MenuContents: UIView {
 				
 				break
 			}
-			
 		}
 	}
 	
 	func generateMaskAndShadow(alignment: MenuView.Alignment) {
-		guard let view = superview else {
+		guard let view = self.superview else {
 			return
 		}
 		
@@ -384,12 +490,11 @@ class MenuContents: UIView {
 		
 		let imageRenderer = UIGraphicsImageRenderer(size: self.shadowView.bounds.size)
 		
-		let shadowMask = imageRenderer.image { context in
-			
+		let shadowMask = imageRenderer.image(actions: { context in
 			UIColor.white.setFill()
 			context.fill(self.shadowView.bounds)
 			path.fill(with: .clear, alpha: 1.0)
-		}
+		})
 		
 		let imageMask = CALayer()
 		imageMask.frame = self.shadowView.bounds
@@ -431,8 +536,8 @@ class MenuContents: UIView {
 		if let maskLayer = self.scrollContainer.layer.mask as? CAGradientLayer {
 			maskLayer.frame = self.bounds
 			
-			let height = self.bounds.size.height
-			let stop2 = 12 / height
+			let height: CGFloat = self.bounds.size.height
+			let stop2: CGFloat = 12 / height
 			
 			maskLayer.startPoint = CGPoint(x: 0.5, y: 0)
 			maskLayer.endPoint = CGPoint(x: 0.5, y: stop2)
