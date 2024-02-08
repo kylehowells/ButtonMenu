@@ -59,6 +59,7 @@
 		CC6CC4392B74736600AA9AA6 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				CC6CC43F2B74743100AA9AA6 /* Util */,
 				CC6CC4342B74736600AA9AA6 /* MenuContents.swift */,
 				CC6CC4352B74736600AA9AA6 /* MenuItem.swift */,
 				CC6CC4362B74736600AA9AA6 /* MenuItemView.swift */,
@@ -101,7 +102,6 @@
 				DB1ED22321DE148A00AEB658 /* AppDelegate.swift */,
 				DB1ED22521DE148A00AEB658 /* ViewController.swift */,
 				CC6CC4392B74736600AA9AA6 /* Menu */,
-				CC6CC43F2B74743100AA9AA6 /* Util */,
 				DB1ED22A21DE148C00AEB658 /* Assets.xcassets */,
 				DB1ED22C21DE148C00AEB658 /* LaunchScreen.storyboard */,
 				DB1ED22F21DE148C00AEB658 /* Info.plist */,
