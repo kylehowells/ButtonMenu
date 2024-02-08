@@ -7,5 +7,4 @@ target 'MenuTest' do
 
   # Pods for MenuTest
   pod 'SnapKit'
-  pod 'Menu', :path => '.'
 end

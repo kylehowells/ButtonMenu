@@ -1,24 +1,16 @@
 PODS:
-  - Menu (0.0.1):
-    - SnapKit
   - SnapKit (4.2.0)
 
 DEPENDENCIES:
-  - Menu (from `.`)
   - SnapKit
 
 SPEC REPOS:
   trunk:
     - SnapKit
 
-EXTERNAL SOURCES:
-  Menu:
-    :path: "."
-
 SPEC CHECKSUMS:
-  Menu: 6c16f9b98795c1a1222baffa2406b151f1e4f323
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: dd02603c16d0ee941684632e4d4c4dcf38516620
+PODFILE CHECKSUM: d4817d67405fcab9486bbec73cef211dc96cfc36
 
 COCOAPODS: 1.15.2

@@ -354,7 +354,7 @@ class MenuContents: UIView {
 			make.top.left.right.equalToSuperview()
 		})
 		
-		applyContentMask()
+		self.applyContentMask()
 	}
 	
 	func focusInitialViewIfNecessary() {
