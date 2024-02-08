@@ -8,87 +8,93 @@
 
 import UIKit
 
+
+// MARK: - MenuItemView
+
 public protocol MenuItemView {
-	var highlighted: Bool { get set }
-	
-	var highlightPosition: CGPoint { get set }
-	
-	var didHighlight: () -> Void { get set }
-	
-	var initialFocusedRect: CGRect? { get }
-	
-	var updateLayout: () -> Void { get set }
-	
-	func startSelectionAnimation(completion: @escaping () -> Void)
+    var highlighted: Bool { get set }
+    
+    var highlightPosition: CGPoint { get set }
+    
+    var didHighlight: () -> Void { get set }
+    
+    var initialFocusedRect: CGRect? { get }
+    
+    var updateLayout: () -> Void { get set }
+    
+    func startSelectionAnimation(completion: @escaping () -> Void)
 }
 
+
+// MARK: - MenuItemView
+
 extension MenuItemView {
-	public func startSelectionAnimation(completion: @escaping () -> Void) {}
-	
-	public var initialFocusedRect: CGRect? { return nil }
+    public func startSelectionAnimation(completion: @escaping () -> Void) {}
+    
+    public var initialFocusedRect: CGRect? { return nil }
 }
 
 
 // MARK: - Separator
 
 class SeparatorMenuItemView: UIView, MenuItemView, MenuThemeable {
-	
-	private let separatorLine = UIView()
-	
-	init() {
-		super.init(frame: .zero)
-		
-		self.layer.borderColor = UIColor.blue.cgColor
-		self.layer.borderWidth = 1
-		
+    
+    private let separatorLine = UIView()
+    
+    init() {
+        super.init(frame: .zero)
+        
 		self.addSubview(self.separatorLine)
+        
 		
-		/*self.separatorLine.snp.makeConstraints { make in
-			make.left.right.equalToSuperview()
-			make.height.equalTo(1)
-			make.top.bottom.equalToSuperview().inset(2)
-		}*/
+//		self.separatorLine.snp.makeConstraints({ make in
+//            make.left.right.equalToSuperview()
+//            make.height.equalTo(1)
+//            make.top.bottom.equalToSuperview().inset(2)
+//        })
+		
 		self.separatorLine.translatesAutoresizingMaskIntoConstraints = false
-		self.separatorLine.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
 		self.separatorLine.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+		self.separatorLine.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
 		
 		self.separatorLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
 		
 		self.separatorLine.topAnchor.constraint(equalTo: self.topAnchor, constant: 2).isActive = true
-		self.separatorLine.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 2).isActive = true
-	}
-	
-	required init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
-	
-	// MARK: - Menu Item View
-	
-	var highlighted: Bool = false
-	
-	var highlightPosition: CGPoint = .zero
-	
-	var didHighlight: () -> Void = {}
-	
-	var updateLayout: () -> Void = {}
-	
-	// MARK: - Themeable
-	
-	func applyTheme(_ theme: MenuTheme) {
+		self.separatorLine.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -2).isActive = true
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Menu Item View
+
+    var highlighted: Bool = false
+    
+    var highlightPosition: CGPoint = .zero
+    
+    var didHighlight: () -> Void = {}
+    
+    var updateLayout: () -> Void = {}
+    
+    // MARK: - Themeable
+    
+    func applyTheme(_ theme: MenuTheme) {
 		self.separatorLine.backgroundColor = theme.separatorColor
-	}
+    }
 	
 }
 
+
 // MARK: - Standard Menu Item
 
-fileprivate extension String {
+extension String {
 	
 	var renderedShortcut: String {
 		switch self {
 			case " ":
 				return "Space"
-			
+				
 			case "\u{8}":
 				return "⌫"
 				
@@ -113,8 +119,8 @@ extension ShortcutMenuItem.Shortcut {
 				label.textAlignment = NSTextAlignment.left
 				
 				/*label.snp.makeConstraints({ make in
-					make.width.greaterThanOrEqualTo(label.snp.height)
-				})*/
+				 make.width.greaterThanOrEqualTo(label.snp.height)
+				 })*/
 				
 				label.translatesAutoresizingMaskIntoConstraints = false
 				label.widthAnchor.constraint(greaterThanOrEqualTo: label.heightAnchor).isActive = true
@@ -141,23 +147,22 @@ public class ShortcutMenuItemView: UIView, MenuItemView, MenuThemeable {
 	public init(item: ShortcutMenuItem) {
 		super.init(frame: .zero)
 		
-		self.layer.borderColor = UIColor.purple.cgColor
-		self.layer.borderWidth = 1
-		
 		self.nameLabel.text = item.name
 		
 		self.addSubview(self.nameLabel)
 		
-		self.nameLabel.textColor = UIColor(white: 0, alpha: 1)
+		self.nameLabel.textColor = .black
 		
-		/*self.nameLabel.snp.makeConstraints({ make in
-			make.top.bottom.equalToSuperview().inset(4)
-			make.left.equalToSuperview().offset(10)
-			make.right.lessThanOrEqualToSuperview().offset(-10)
-		})*/
+//		self.nameLabel.snp.makeConstraints({ make in
+//			make.top.bottom.equalToSuperview().inset(4)
+//			make.left.equalToSuperview().offset(10)
+//			make.right.lessThanOrEqualToSuperview().offset(-10)
+//		})
 		self.nameLabel.translatesAutoresizingMaskIntoConstraints = false
+		
 		self.nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 4).isActive = true
-		self.nameLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 4).isActive = true
+		self.nameLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -4).isActive = true
+		
 		self.nameLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10).isActive = true
 		self.nameLabel.rightAnchor.constraint(lessThanOrEqualTo: self.rightAnchor, constant: -10).isActive = true
 		
@@ -171,40 +176,21 @@ public class ShortcutMenuItemView: UIView, MenuItemView, MenuThemeable {
 			})*/
 			self.nameLabel.rightAnchor.constraint(lessThanOrEqualTo: self.shortcutStack.leftAnchor, constant: -12).isActive = true
 			
-			/*self.shortcutStack.snp.makeConstraints({ make in
-				make.top.bottom.equalToSuperview().inset(2)
-				make.right.equalToSuperview().inset(6)
-			})*/
+//			self.shortcutStack.snp.makeConstraints({ make in
+//				make.top.bottom.equalToSuperview().inset(2)
+//				make.right.equalToSuperview().inset(6)
+//			})
 			self.shortcutStack.topAnchor.constraint(equalTo: self.topAnchor, constant: 2).isActive = true
-			self.shortcutStack.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 2).isActive = true
-			self.shortcutStack.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 6).isActive = true
+			self.shortcutStack.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -2).isActive = true
+			
+			self.shortcutStack.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 2).isActive = true
 			
 			self.shortcutStack.setContentHuggingPriority(.required, for: .horizontal)
 			
-			let labels: [UILabel] = shortcut.labels
+			let labels = shortcut.labels
 			
 			for (index, label) in labels.enumerated() {
 				self.shortcutStack.addSubview(label)
-				
-				//make.top.bottom.equalToSuperview()
-				label.translatesAutoresizingMaskIntoConstraints = false
-				label.topAnchor.constraint(equalTo: self.shortcutStack.topAnchor).isActive = true
-				label.bottomAnchor.constraint(equalTo: self.shortcutStack.bottomAnchor).isActive = true
-				
-				if index == 0 {
-					label.leftAnchor.constraint(equalTo: self.shortcutStack.leftAnchor).isActive = true
-				}
-				else if index < labels.count - 1 {
-					label.leftAnchor.constraint(equalTo: labels[index - 1].rightAnchor, constant: 1.0 / UIScreen.main.scale).isActive = true
-				}
-				
-				if index == labels.count - 1 {
-					if index > 0 {
-						label.leftAnchor.constraint(equalTo: labels[index - 1].rightAnchor, constant: 2).isActive = true
-					}
-					
-					label.rightAnchor.constraint(equalTo: self.shortcutStack.rightAnchor).isActive = true
-				}
 				
 				/*label.snp.makeConstraints({ make in
 					make.top.bottom.equalToSuperview()
@@ -224,6 +210,27 @@ public class ShortcutMenuItemView: UIView, MenuItemView, MenuThemeable {
 						make.right.equalToSuperview()
 					}
 				})*/
+				
+				//make.top.bottom.equalToSuperview()
+				label.translatesAutoresizingMaskIntoConstraints = false
+				
+				label.topAnchor.constraint(equalTo: self.shortcutStack.topAnchor).isActive = true
+				label.bottomAnchor.constraint(equalTo: self.shortcutStack.bottomAnchor).isActive = true
+				
+				if index == 0 {
+					label.leftAnchor.constraint(equalTo: self.shortcutStack.leftAnchor).isActive = true
+				}
+				else if index < labels.count - 1 {
+					label.leftAnchor.constraint(equalTo: labels[index - 1].rightAnchor, constant: 1.0 / UIScreen.main.scale).isActive = true
+				}
+				
+				if index == labels.count - 1 {
+					if index > 0 {
+						label.leftAnchor.constraint(equalTo: labels[index - 1].rightAnchor, constant: 2).isActive = true
+					}
+					
+					label.rightAnchor.constraint(equalTo: self.shortcutStack.rightAnchor).isActive = true
+				}
 			}
 		}
 	}
@@ -242,7 +249,7 @@ public class ShortcutMenuItemView: UIView, MenuItemView, MenuThemeable {
 		})
 	}
 	
-	// MARK: - Menu Item View
+	//MARK: - Menu Item View
 	
 	public var highlighted: Bool = false {
 		didSet {
@@ -254,11 +261,12 @@ public class ShortcutMenuItemView: UIView, MenuItemView, MenuThemeable {
 		}
 	}
 	
-	public var highlightPosition: CGPoint = CGPoint.zero
+	public var highlightPosition: CGPoint = .zero
 	
 	public var didHighlight: () -> Void = {}
 	
 	public var updateLayout: () -> Void = {}
+	
 	
 	// MARK: - Themeable Helpers
 	
@@ -266,9 +274,9 @@ public class ShortcutMenuItemView: UIView, MenuItemView, MenuThemeable {
 	
 	private func updateHighlightState(_ highlighted: Bool) {
 		self.nameLabel.isHighlighted = highlighted
-		self.shortcutLabels.forEach({ $0.isHighlighted = highlighted })
+		self.shortcutLabels.forEach { $0.isHighlighted = highlighted }
 		
-		self.backgroundColor = highlighted ? self.highlightedBackgroundColor : UIColor.purple
+		self.backgroundColor = highlighted ? self.highlightedBackgroundColor : UIColor.clear
 	}
 	
 	// MARK: - Themeable
@@ -288,5 +296,24 @@ public class ShortcutMenuItemView: UIView, MenuItemView, MenuThemeable {
 		
 		self.updateHighlightState(self.highlighted)
 	}
-	
 }
+
+
+
+// MARK: - Swift Preview
+
+#if DEBUG
+
+// Not meant to be touched. Updates itself because of the binding
+import SwiftUI
+
+struct MenuItemView_ViewController_Preview: PreviewProvider {
+	static var previews: some View {
+		return Wrapper(noOp: Binding.constant("no-op"))
+			.edgesIgnoringSafeArea(.all)
+			.previewInterfaceOrientation(.portrait)
+			.previewDisplayName("ViewController")
+	}
+}
+
+#endif

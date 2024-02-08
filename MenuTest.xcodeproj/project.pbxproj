@@ -3,17 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		523657D221E077BB00631186 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 523657D121E077BB00631186 /* MapKit.framework */; };
-		CC6DAA832B63584B0049AB52 /* MenuTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6DAA7C2B63584B0049AB52 /* MenuTheme.swift */; };
-		CC6DAA842B63584B0049AB52 /* MenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6DAA7D2B63584B0049AB52 /* MenuItemView.swift */; };
-		CC6DAA852B63584B0049AB52 /* MenuContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6DAA7E2B63584B0049AB52 /* MenuContents.swift */; };
-		CC6DAA862B63584B0049AB52 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6DAA7F2B63584B0049AB52 /* MenuItem.swift */; };
-		CC6DAA872B63584B0049AB52 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6DAA802B63584B0049AB52 /* MenuView.swift */; };
-		CC6DAA882B63584B0049AB52 /* UIScrollView+ScrollToRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6DAA822B63584B0049AB52 /* UIScrollView+ScrollToRect.swift */; };
+		CC6CC43A2B74742000AA9AA6 /* MenuTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6CC4372B74736600AA9AA6 /* MenuTheme.swift */; };
+		CC6CC43B2B74742000AA9AA6 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6CC4382B74736600AA9AA6 /* MenuView.swift */; };
+		CC6CC43C2B74742000AA9AA6 /* MenuContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6CC4342B74736600AA9AA6 /* MenuContents.swift */; };
+		CC6CC43D2B74742000AA9AA6 /* MenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6CC4362B74736600AA9AA6 /* MenuItemView.swift */; };
+		CC6CC43E2B74742000AA9AA6 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6CC4352B74736600AA9AA6 /* MenuItem.swift */; };
+		CC6CC4412B74743100AA9AA6 /* UIScrollView+ScrollToRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6CC4402B74743100AA9AA6 /* UIScrollView+ScrollToRect.swift */; };
 		DB1ED22421DE148A00AEB658 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1ED22321DE148A00AEB658 /* AppDelegate.swift */; };
 		DB1ED22621DE148A00AEB658 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1ED22521DE148A00AEB658 /* ViewController.swift */; };
 		DB1ED22B21DE148C00AEB658 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB1ED22A21DE148C00AEB658 /* Assets.xcassets */; };
@@ -22,12 +22,12 @@
 
 /* Begin PBXFileReference section */
 		523657D121E077BB00631186 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		CC6DAA7C2B63584B0049AB52 /* MenuTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTheme.swift; sourceTree = "<group>"; };
-		CC6DAA7D2B63584B0049AB52 /* MenuItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
-		CC6DAA7E2B63584B0049AB52 /* MenuContents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuContents.swift; sourceTree = "<group>"; };
-		CC6DAA7F2B63584B0049AB52 /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
-		CC6DAA802B63584B0049AB52 /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
-		CC6DAA822B63584B0049AB52 /* UIScrollView+ScrollToRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+ScrollToRect.swift"; sourceTree = "<group>"; };
+		CC6CC4342B74736600AA9AA6 /* MenuContents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuContents.swift; sourceTree = "<group>"; };
+		CC6CC4352B74736600AA9AA6 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
+		CC6CC4362B74736600AA9AA6 /* MenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
+		CC6CC4372B74736600AA9AA6 /* MenuTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTheme.swift; sourceTree = "<group>"; };
+		CC6CC4382B74736600AA9AA6 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		CC6CC4402B74743100AA9AA6 /* UIScrollView+ScrollToRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+ScrollToRect.swift"; sourceTree = "<group>"; };
 		DB1ED22021DE148A00AEB658 /* MenuTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MenuTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB1ED22321DE148A00AEB658 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB1ED22521DE148A00AEB658 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,22 +56,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		CC6DAA7B2B63584B0049AB52 /* Menu */ = {
+		CC6CC4392B74736600AA9AA6 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				CC6DAA7C2B63584B0049AB52 /* MenuTheme.swift */,
-				CC6DAA7D2B63584B0049AB52 /* MenuItemView.swift */,
-				CC6DAA7E2B63584B0049AB52 /* MenuContents.swift */,
-				CC6DAA7F2B63584B0049AB52 /* MenuItem.swift */,
-				CC6DAA802B63584B0049AB52 /* MenuView.swift */,
+				CC6CC43F2B74743100AA9AA6 /* Util */,
+				CC6CC4342B74736600AA9AA6 /* MenuContents.swift */,
+				CC6CC4352B74736600AA9AA6 /* MenuItem.swift */,
+				CC6CC4362B74736600AA9AA6 /* MenuItemView.swift */,
+				CC6CC4372B74736600AA9AA6 /* MenuTheme.swift */,
+				CC6CC4382B74736600AA9AA6 /* MenuView.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
 		};
-		CC6DAA812B63584B0049AB52 /* Util */ = {
+		CC6CC43F2B74743100AA9AA6 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				CC6DAA822B63584B0049AB52 /* UIScrollView+ScrollToRect.swift */,
+				CC6CC4402B74743100AA9AA6 /* UIScrollView+ScrollToRect.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -84,6 +85,8 @@
 				73D000595D809CE8933B575C /* Frameworks */,
 			);
 			sourceTree = "<group>";
+			tabWidth = 4;
+			usesTabs = 1;
 		};
 		DB1ED22121DE148A00AEB658 /* Products */ = {
 			isa = PBXGroup;
@@ -96,10 +99,9 @@
 		DB1ED22221DE148A00AEB658 /* MenuTest */ = {
 			isa = PBXGroup;
 			children = (
-				CC6DAA7B2B63584B0049AB52 /* Menu */,
-				CC6DAA812B63584B0049AB52 /* Util */,
 				DB1ED22321DE148A00AEB658 /* AppDelegate.swift */,
 				DB1ED22521DE148A00AEB658 /* ViewController.swift */,
+				CC6CC4392B74736600AA9AA6 /* Menu */,
 				DB1ED22A21DE148C00AEB658 /* Assets.xcassets */,
 				DB1ED22C21DE148C00AEB658 /* LaunchScreen.storyboard */,
 				DB1ED22F21DE148C00AEB658 /* Info.plist */,
@@ -133,8 +135,9 @@
 		DB1ED21821DE148A00AEB658 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1520;
 				ORGANIZATIONNAME = "Two Lives Left";
 				TargetAttributes = {
 					DB1ED21F21DE148A00AEB658 = {
@@ -182,13 +185,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC6DAA872B63584B0049AB52 /* MenuView.swift in Sources */,
-				CC6DAA842B63584B0049AB52 /* MenuItemView.swift in Sources */,
+				CC6CC43E2B74742000AA9AA6 /* MenuItem.swift in Sources */,
 				DB1ED22621DE148A00AEB658 /* ViewController.swift in Sources */,
-				CC6DAA852B63584B0049AB52 /* MenuContents.swift in Sources */,
-				CC6DAA862B63584B0049AB52 /* MenuItem.swift in Sources */,
-				CC6DAA882B63584B0049AB52 /* UIScrollView+ScrollToRect.swift in Sources */,
-				CC6DAA832B63584B0049AB52 /* MenuTheme.swift in Sources */,
+				CC6CC43B2B74742000AA9AA6 /* MenuView.swift in Sources */,
+				CC6CC43C2B74742000AA9AA6 /* MenuContents.swift in Sources */,
+				CC6CC43A2B74742000AA9AA6 /* MenuTheme.swift in Sources */,
+				CC6CC4412B74743100AA9AA6 /* UIScrollView+ScrollToRect.swift in Sources */,
+				CC6CC43D2B74742000AA9AA6 /* MenuItemView.swift in Sources */,
 				DB1ED22421DE148A00AEB658 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -233,6 +236,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -244,6 +248,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -258,7 +263,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -294,6 +299,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -305,6 +311,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -313,7 +320,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -328,13 +335,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G5S3RZ43N7;
+				DEVELOPMENT_TEAM = NFTL2336WY;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = MenuTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.twolivesleft.MenuTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ikyle.MenuTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -346,13 +355,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G5S3RZ43N7;
+				DEVELOPMENT_TEAM = NFTL2336WY;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = MenuTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.twolivesleft.MenuTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ikyle.MenuTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
