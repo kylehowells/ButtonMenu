@@ -380,6 +380,10 @@ class MenuContents: UIView {
 			make.top.equalTo(superview.snp.bottom)
 		})*/
 		if let scrollContainerSuperview = self.scrollContainer.superview {
+			// Remove all constraints
+			self.scrollContainer.removeFromSuperview()
+			scrollContainerSuperview.addSubview(self.scrollContainer)
+			
 			self.scrollContainer.leftAnchor.constraint(equalTo: scrollContainerSuperview.leftAnchor).isActive = true
 			self.scrollContainer.bottomAnchor.constraint(equalTo: scrollContainerSuperview.bottomAnchor).isActive = true
 			self.scrollContainer.rightAnchor.constraint(equalTo: scrollContainerSuperview.rightAnchor).isActive = true
@@ -396,6 +400,10 @@ class MenuContents: UIView {
 			make.top.left.right.equalToSuperview()
 		})*/
 		if let scrollViewSuperview = self.scrollView.superview {
+			// Remove all constraints
+			self.scrollView.removeFromSuperview()
+			scrollViewSuperview.addSubview(self.scrollView)
+			
 			self.scrollView.widthAnchor.constraint(greaterThanOrEqualTo: superview.widthAnchor, constant: 100).isActive = true
 			self.scrollView.bottomAnchor.constraint(equalTo: scrollViewSuperview.bottomAnchor).isActive = true
 			
