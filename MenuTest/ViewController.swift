@@ -25,7 +25,6 @@ class ViewController: UIViewController {
 		let menu = MenuView(title: "Menu", theme: LightMenuTheme()) { [weak self] () -> [MenuItem] in
 			return [
 				ShortcutMenuItem(name: "Undo", shortcut: (.command, "Z"), action: { [weak self] in
-					
 					let alert = UIAlertController(title: "Undo Action", message: "You selected undo", preferredStyle: .alert)
 					alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
 					

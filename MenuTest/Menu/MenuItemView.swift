@@ -25,6 +25,9 @@ public protocol MenuItemView {
     func startSelectionAnimation(completion: @escaping () -> Void)
 }
 
+
+// MARK: - MenuItemView
+
 extension MenuItemView {
     public func startSelectionAnimation(completion: @escaping () -> Void) {}
     
@@ -77,11 +80,13 @@ class SeparatorMenuItemView: UIView, MenuItemView, MenuThemeable {
     // MARK: - Themeable
     
     func applyTheme(_ theme: MenuTheme) {
-        separatorLine.backgroundColor = theme.separatorColor
+		self.separatorLine.backgroundColor = theme.separatorColor
     }
+	
 }
 
-//MARK: - Standard Menu Item
+
+// MARK: - Standard Menu Item
 
 extension String {
 	

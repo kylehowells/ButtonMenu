@@ -6,5 +6,4 @@ target 'MenuTest' do
   use_frameworks!
 
   # Pods for MenuTest
-  pod 'SnapKit'
 end

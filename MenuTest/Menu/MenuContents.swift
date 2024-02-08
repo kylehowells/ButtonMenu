@@ -434,7 +434,7 @@ class MenuContents: UIView {
 			return
 		}
 		
-		let path = self.computePath(withParentView: view, alignment: alignment)
+		let path: UIBezierPath = self.computePath(withParentView: view, alignment: alignment)
 		
 		// Mask effect view
 		let shapeMask = CAShapeLayer()
@@ -444,7 +444,7 @@ class MenuContents: UIView {
 		// Create inverse mask for shadow layer
 		path.apply(CGAffineTransform(translationX: 20, y: 20))
 		
-		let sublayer = self.shadowView.layer
+		let sublayer: CALayer = self.shadowView.layer
 		
 		sublayer.shadowPath = path.cgPath
 		sublayer.shadowOffset = CGSize(width: 0, height: 6)
@@ -460,7 +460,6 @@ class MenuContents: UIView {
 		let imageMask = CALayer()
 		imageMask.frame = self.shadowView.bounds
 		imageMask.contents = shadowMask.cgImage
-		
 		sublayer.mask = imageMask
 	}
 	
@@ -493,8 +492,8 @@ class MenuContents: UIView {
 		if let maskLayer = self.scrollContainer.layer.mask as? CAGradientLayer {
 			maskLayer.frame = self.bounds
 			
-			let height = self.bounds.size.height
-			let stop2 = 12 / height
+			let height: CGFloat = self.bounds.size.height
+			let stop2: CGFloat = (12 / height)
 			
 			maskLayer.startPoint = CGPoint(x: 0.5, y: 0)
 			maskLayer.endPoint = CGPoint(x: 0.5, y: stop2)
@@ -505,7 +504,11 @@ class MenuContents: UIView {
 		let maskLayer = CAGradientLayer()
 		
 		maskLayer.frame = self.bounds
-		maskLayer.colors = [UIColor.clear.cgColor, UIColor.clear.cgColor, UIColor.white.cgColor]
+		maskLayer.colors = [
+			UIColor.clear.cgColor,
+			UIColor.clear.cgColor,
+			UIColor.white.cgColor
+		]
 		maskLayer.locations = [0, 0.72, 1.0]
 		maskLayer.startPoint = CGPoint(x: 0.5, y: 0)
 		maskLayer.endPoint = CGPoint(x: 0.5, y: 0.33)
@@ -515,6 +518,8 @@ class MenuContents: UIView {
 	
 }
 
+
+// MARK: - Helper
 
 fileprivate extension UIView {
 	func edgesEqualToSuperview() {
