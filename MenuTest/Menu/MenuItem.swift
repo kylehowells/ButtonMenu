@@ -9,30 +9,35 @@
 import UIKit
 
 public protocol MenuItem {
-    typealias MenuViewType = (UIView & MenuThemeable & MenuItemView)
-    
-    var view: MenuViewType { get }
-    
-    func performAction()
+	typealias MenuViewType = (UIView & MenuThemeable & MenuItemView)
+	
+	var view: MenuViewType { get }
+	
+	func performAction()
 }
+
+
+// MARK: - SeparatorMenuItem
 
 public struct SeparatorMenuItem: Equatable, MenuItem {
-    
-    public var view: MenuItem.MenuViewType {
-        return SeparatorMenuItemView()
-    }
-    
-    public init() {}
-    
-    public static func == (lhs: SeparatorMenuItem, rhs: SeparatorMenuItem) -> Bool {
-        return true
-    }
-    
-    public func performAction() { }
+	
+	public var view: MenuItem.MenuViewType {
+		return SeparatorMenuItemView()
+	}
+	
+	public init() { }
+	
+	public static func == (lhs: SeparatorMenuItem, rhs: SeparatorMenuItem) -> Bool {
+		return true
+	}
+	
+	public func performAction() {}
 }
 
+
+// MARK: - UIKeyModifierFlags
+
 public extension UIKeyModifierFlags {
-	
 	var symbols: [String] {
 		var result: [String] = []
 		
@@ -54,7 +59,6 @@ public extension UIKeyModifierFlags {
 		
 		return result
 	}
-	
 }
 
 
@@ -97,6 +101,7 @@ public struct ShortcutMenuItem: Equatable, MenuItem {
 	public func performAction() {
 		self.action()
 	}
+	
 }
 
 public extension ShortcutMenuItem {
@@ -105,7 +110,26 @@ public extension ShortcutMenuItem {
 //        if let shortcut = shortcut {
 //            return UIKeyCommand(input: shortcut.key, modifierFlags: shortcut.modifiers, action: action, discoverabilityTitle: shortcut.title)
 //        }
-
+		
 		return nil
 	}
 }
+
+
+// MARK: - Swift Preview
+
+#if DEBUG
+
+// Not meant to be touched. Updates itself because of the binding
+import SwiftUI
+
+struct MenuItem_ViewController_Preview: PreviewProvider {
+	static var previews: some View {
+		return Wrapper(noOp: Binding.constant("no-op"))
+			.edgesIgnoringSafeArea(.all)
+			.previewInterfaceOrientation(.portrait)
+			.previewDisplayName("ViewController")
+	}
+}
+
+#endif
