@@ -14,12 +14,15 @@ class ViewController: UIViewController {
 	
 	let mapView: MKMapView = MKMapView()
 	
+	var menuView: MenuView? = nil
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		// - Map view
 		self.view.insertSubview(self.mapView, at: 0)
 		
+		// - Menu
 		let menu = MenuView(title: "Menu", theme: LightMenuTheme()) { [weak self] () -> [MenuItem] in
 			return [
 				ShortcutMenuItem(name: "Undo", shortcut: (.command, "Z"), action: { [weak self] in
@@ -42,10 +45,11 @@ class ViewController: UIViewController {
 				ShortcutMenuItem(name: "Help", shortcut: (.command, "?"), action: {}),
 			]
 		}
+		self.menuView = menu
 		
 		self.view.addSubview(menu)
 		
-		menu.tintColor = .black
+		menu.tintColor = UIColor.black
 		
 		
 		/*menu.snp.makeConstraints({ make in
@@ -90,12 +94,15 @@ struct ViewController_Preview: PreviewProvider {
 }
 
 // Could probably use a generic, for easier reuse
-fileprivate struct Wrapper: UIViewControllerRepresentable {
+struct Wrapper: UIViewControllerRepresentable {
 	
 	@Binding var noOp: String // no-op -> binding just to trigger updateUIView
 	
 	func makeUIViewController(context: Context) -> UIViewController {
-		return ViewController()
+		let vc = ViewController()
+		let _ = vc.view
+		vc.menuView?.showContents()
+		return vc
 	}
 	
 	func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
