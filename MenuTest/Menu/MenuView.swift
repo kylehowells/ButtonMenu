@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import SnapKit
 
-//MARK: - MenuView
+
+// MARK: - MenuView
 
 public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
 	
@@ -65,44 +65,64 @@ public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
 		self.titleLabel.textColor = theme.darkTintColor
 		self.titleLabel.textAlignment = .center
 		self.titleLabel.setContentHuggingPriority(.required, for: .horizontal)
+		self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
 		
 		let clippingView = UIView()
 		clippingView.clipsToBounds = true
-		
 		self.addSubview(clippingView)
 		
-		clippingView.snp.makeConstraints({ make in
+		/*clippingView.snp.makeConstraints({ make in
 			make.edges.equalToSuperview()
-		})
+		})*/
+		clippingView.edgesEqualToSuperview()
 		
 		clippingView.layer.cornerRadius = 8.0
 		
 		clippingView.addSubview(self.effectView)
 		
-		self.effectView.snp.makeConstraints({make in
+		/*self.effectView.snp.makeConstraints({make in
 			make.edges.equalToSuperview()
-		})
+		})*/
+		self.effectView.edgesEqualToSuperview()
 		
 		self.effectView.contentView.addSubview(self.tintView)
 		self.effectView.contentView.addSubview(self.titleLabel)
 		self.effectView.contentView.addSubview(self.gestureBarView)
 		
-		self.tintView.snp.makeConstraints({ make in
+		/*self.tintView.snp.makeConstraints({ make in
 			make.edges.equalToSuperview()
-		})
+		})*/
+		self.tintView.edgesEqualToSuperview()
 		
-		self.titleLabel.snp.makeConstraints({ make in
+		/*self.titleLabel.snp.makeConstraints({ make in
 			make.left.right.equalToSuperview().inset(12)
 			make.centerY.equalToSuperview()
-		})
+		})*/
+		if let titleLabelSuperview = self.titleLabel.superview {
+			self.titleLabel.leftAnchor.constraint(equalTo: titleLabelSuperview.leftAnchor, constant: 12).isActive = true
+			self.titleLabel.rightAnchor.constraint(equalTo: titleLabelSuperview.rightAnchor, constant: -12).isActive = true
+			
+			self.titleLabel.centerYAnchor.constraint(equalTo: titleLabelSuperview.centerYAnchor).isActive = true
+		}
 		
 		self.gestureBarView.layer.cornerRadius = 1.0
-		self.gestureBarView.snp.makeConstraints({ make in
+		self.gestureBarView.translatesAutoresizingMaskIntoConstraints = false
+		
+		/*self.gestureBarView.snp.makeConstraints({ make in
 			make.centerX.equalToSuperview()
 			make.height.equalTo(2)
 			make.width.equalTo(20)
 			make.bottom.equalToSuperview().inset(3)
-		})
+		})*/
+		
+		if let gestureBarViewSuperview = self.gestureBarView.superview {
+			self.gestureBarView.centerXAnchor.constraint(equalTo: gestureBarViewSuperview.centerXAnchor).isActive = true
+			
+			self.gestureBarView.heightAnchor.constraint(equalToConstant: 2).isActive = true
+			self.gestureBarView.widthAnchor.constraint(equalToConstant: 20).isActive = true
+			
+			self.gestureBarView.bottomAnchor.constraint(equalTo: gestureBarViewSuperview.bottomAnchor, constant: 3).isActive = true
+		}
 		
 		self.longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressGesture(_:)))
 		self.longPress.minimumPressDuration = 0.0
@@ -117,7 +137,10 @@ public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
 		
 		self.menuPresentationObserver = NotificationCenter.default.addObserver(forName: MenuView.menuWillPresent, object: nil, queue: nil, using: { [weak self] notification in
 			
-			if let poster = notification.object as? MenuView, let this = self, poster !== this {
+			if let poster = notification.object as? MenuView,
+			   let this = self,
+			   poster !== this
+			{
 				self?.hideContents(animated: false)
 			}
 		})
@@ -127,7 +150,7 @@ public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
 		NotificationCenter.default.removeObserver(self.menuPresentationObserver)
 	}
 	
-	//MARK: - Required Init
+	// MARK: - Required Init
 	
 	public required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
@@ -223,7 +246,9 @@ public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
 		
 		self.addSubview(contents)
 		
-		contents.snp.makeConstraints({ make in
+		contents.translatesAutoresizingMaskIntoConstraints = false
+		
+		/*contents.snp.makeConstraints({ make in
 			switch self.contentAlignment {
 				case .left:
 					make.top.right.equalToSuperview()
@@ -232,7 +257,20 @@ public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
 				case .center:
 					make.top.centerX.equalToSuperview()
 			}
-		})
+		})*/
+		switch self.contentAlignment {
+			case .left:
+				contents.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+				contents.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+				
+			case .center:
+				contents.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+				contents.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+				
+			case .right:
+				contents.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+				contents.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+		}
 		
 		self.effectView.isHidden = true
 		
@@ -254,7 +292,7 @@ public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
 	}
 	
 	public func hideContents(animated: Bool) {
-		let contentsView = self.contents
+		let contentsView: MenuContents? = self.contents
 		self.contents = nil
 		
 		self.longPress?.minimumPressDuration = 0.0
@@ -280,11 +318,11 @@ public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
 	// MARK: - Relayout
 	
 	private func relayoutContents() {
-		if let contents = self.contents {
+		if let contents: MenuContents = self.contents {
 			self.setNeedsLayout()
 			self.layoutIfNeeded()
 			
-			contents.generateMaskAndShadow(alignment: contentAlignment)
+			contents.generateMaskAndShadow(alignment: self.contentAlignment)
 		}
 	}
 	
@@ -305,7 +343,7 @@ public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
 	}
 	
 	public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-		guard let contents = self.contents else {
+		guard let contents: MenuContents = self.contents else {
 			return super.hitTest(point, with: event)
 		}
 		
@@ -340,3 +378,49 @@ public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
 	}
 	
 }
+
+
+// MARK: - Helper
+
+fileprivate extension UIView {
+	func edgesEqualToSuperview() {
+		guard let superview = self.superview else { return }
+		
+		self.translatesAutoresizingMaskIntoConstraints = false
+		
+		self.leadingAnchor.constraint(equalTo: superview.leadingAnchor).isActive = true
+		self.trailingAnchor.constraint(equalTo: superview.trailingAnchor).isActive = true
+		self.topAnchor.constraint(equalTo: superview.topAnchor).isActive = true
+		self.bottomAnchor.constraint(equalTo: superview.bottomAnchor).isActive = true
+	}
+	
+	func edgesEqualToSuperview(padding: CGFloat) {
+		guard let superview = self.superview else { return }
+		
+		self.translatesAutoresizingMaskIntoConstraints = false
+		
+		self.leftAnchor.constraint(equalTo: superview.leftAnchor, constant: padding).isActive = true
+		self.rightAnchor.constraint(equalTo: superview.rightAnchor, constant: -padding).isActive = true
+		self.topAnchor.constraint(equalTo: superview.topAnchor, constant: padding).isActive = true
+		self.bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -padding).isActive = true
+	}
+}
+
+
+// MARK: - Swift Preview
+
+#if DEBUG
+
+// Not meant to be touched. Updates itself because of the binding
+import SwiftUI
+
+struct MenuView_ViewController_Preview: PreviewProvider {
+	static var previews: some View {
+		return Wrapper(noOp: Binding.constant("no-op"))
+			.edgesIgnoringSafeArea(.all)
+			.previewInterfaceOrientation(.portrait)
+			.previewDisplayName("ViewController")
+	}
+}
+
+#endif
