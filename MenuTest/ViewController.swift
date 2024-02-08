@@ -9,11 +9,17 @@
 import UIKit
 import SnapKit
 import Menu
+import MapKit
 
 class ViewController: UIViewController {
 	
+	let mapView: MKMapView = MKMapView()
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		// - Map view
+		self.view.insertSubview(self.mapView, at: 0)
 		
 		let menu = MenuView(title: "Menu", theme: LightMenuTheme()) { [weak self] () -> [MenuItem] in
 			return [
@@ -42,13 +48,60 @@ class ViewController: UIViewController {
 		
 		menu.tintColor = .black
 		
-		menu.snp.makeConstraints({ make in
+		
+		/*menu.snp.makeConstraints({ make in
 			
 			make.center.equalToSuperview()
 			
 			// Menus don't have an intrinsic height
 			make.height.equalTo(40)
-		})
+		})*/
+		
+		menu.translatesAutoresizingMaskIntoConstraints = false
+		menu.heightAnchor.constraint(equalToConstant: 40).isActive = true
+		
+		menu.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+		menu.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+		
+	}
+	
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		
+		self.mapView.frame = self.view.bounds
 	}
 	
 }
+
+
+// MARK: - Swift Preview
+
+#if DEBUG
+
+// Not meant to be touched. Updates itself because of the binding
+import SwiftUI
+
+struct ViewController_Preview: PreviewProvider {
+	static var previews: some View {
+		return Wrapper(noOp: Binding.constant("no-op"))
+			.edgesIgnoringSafeArea(.all)
+			.previewInterfaceOrientation(.portrait)
+			.previewDisplayName("ViewController")
+	}
+}
+
+// Could probably use a generic, for easier reuse
+fileprivate struct Wrapper: UIViewControllerRepresentable {
+	
+	@Binding var noOp: String // no-op -> binding just to trigger updateUIView
+	
+	func makeUIViewController(context: Context) -> UIViewController {
+		return ViewController()
+	}
+	
+	func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+		uiViewController.view.layoutSubviews()
+	}
+}
+
+#endif
