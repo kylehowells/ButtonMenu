@@ -49,18 +49,42 @@ class ViewController: UIViewController {
 		
 		menu.tintColor = UIColor.black
 		
+		/*
+		// AutoLayout Example
 		menu.translatesAutoresizingMaskIntoConstraints = false
 		
 		menu.heightAnchor.constraint(equalToConstant: 40).isActive = true
 		
 		menu.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
 		menu.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+		*/
 	}
 	
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
+		let safeArea = self.view.safeAreaInsets
+		let size = self.view.bounds.size
 		
 		self.mapView.frame = self.view.bounds
+		
+		if let menuView = self.menuView {
+			// - Manual Layout Example
+			
+			menuView.frame = {
+				let menuButtonSize = menuView.systemLayoutSizeFitting(CGSize(
+					width: size.width,
+					height: 60
+				))
+				print("menuButtonSize: \(menuButtonSize)")
+				
+				var frame = CGRect()
+				frame.size.width = menuButtonSize.width
+				frame.size.height = 40
+				frame.origin.x = safeArea.left + 20
+				frame.origin.y = safeArea.top + 10
+				return frame
+			}()
+		}
 	}
 	
 }
@@ -90,7 +114,7 @@ struct Wrapper: UIViewControllerRepresentable {
 	func makeUIViewController(context: Context) -> UIViewController {
 		let vc = ViewController()
 		let _ = vc.view
-		vc.menuView?.showContents()
+		//vc.menuView?.showContents()
 		return vc
 	}
 	
