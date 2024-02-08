@@ -8,7 +8,7 @@ DEPENDENCIES:
   - SnapKit
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - SnapKit
 
 EXTERNAL SOURCES:
@@ -16,9 +16,9 @@ EXTERNAL SOURCES:
     :path: "."
 
 SPEC CHECKSUMS:
-  Menu: c276a80be7c890826351145dcf05e1a1ab619a42
+  Menu: 6c16f9b98795c1a1222baffa2406b151f1e4f323
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: afebc92a43de9a4126ebd56e0e1a92c01196be88
+PODFILE CHECKSUM: dd02603c16d0ee941684632e4d4c4dcf38516620
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.15.2
