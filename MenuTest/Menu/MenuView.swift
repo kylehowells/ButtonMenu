@@ -378,19 +378,11 @@ fileprivate extension UIView {
 
 
 // MARK: - Swift Preview
-
-#if DEBUG
-
-// Not meant to be touched. Updates itself because of the binding
-import SwiftUI
-
-struct MenuView_ViewController_Preview: PreviewProvider {
-	static var previews: some View {
-		return Wrapper(noOp: Binding.constant("no-op"))
-			.edgesIgnoringSafeArea(.all)
-			.previewInterfaceOrientation(.portrait)
-			.previewDisplayName("ViewController")
-	}
-}
-
-#endif
+//#if DEBUG
+//import SwiftUI
+//struct MenuContents_ViewController_Preview: PreviewProvider {
+//	static var previews: some View {
+//		return Wrapper(noOp: Binding.constant("no-op")).edgesIgnoringSafeArea(.all)
+//	}
+//}
+//#endif

@@ -101,7 +101,6 @@ struct ViewController_Preview: PreviewProvider {
 	static var previews: some View {
 		return Wrapper(noOp: Binding.constant("no-op"))
 			.edgesIgnoringSafeArea(.all)
-			.previewInterfaceOrientation(.portrait)
 			.previewDisplayName("ViewController")
 	}
 }
@@ -113,8 +112,9 @@ struct Wrapper: UIViewControllerRepresentable {
 	
 	func makeUIViewController(context: Context) -> UIViewController {
 		let vc = ViewController()
-		let _ = vc.view
-		//vc.menuView?.showContents()
+		let v = vc.view
+		v?.layoutIfNeeded()
+		vc.menuView?.showContents()
 		return vc
 	}
 	
