@@ -116,18 +116,18 @@ public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
 		self.applyTheme(theme)
 		
 		self.menuPresentationObserver = NotificationCenter.default.addObserver(forName: MenuView.menuWillPresent, object: nil, queue: nil, using: { [weak self] notification in
+			guard let self = self else { return }
 			
 			if let poster = notification.object as? MenuView,
-			   let this = self,
-			   poster !== this
+			   poster !== self
 			{
-				self?.hideContents(animated: false)
+				self.hideContents(animated: false)
 			}
 		})
 	}
 	
 	deinit {
-		NotificationCenter.default.removeObserver(self.menuPresentationObserver)
+		NotificationCenter.default.removeObserver(self.menuPresentationObserver!)
 	}
 	
 	// MARK: - Required Init
