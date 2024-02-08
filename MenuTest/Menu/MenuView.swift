@@ -121,7 +121,7 @@ public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
 			self.gestureBarView.heightAnchor.constraint(equalToConstant: 2).isActive = true
 			self.gestureBarView.widthAnchor.constraint(equalToConstant: 20).isActive = true
 			
-			self.gestureBarView.bottomAnchor.constraint(equalTo: gestureBarViewSuperview.bottomAnchor, constant: 3).isActive = true
+			self.gestureBarView.bottomAnchor.constraint(equalTo: gestureBarViewSuperview.bottomAnchor, constant: -3).isActive = true
 		}
 		
 		self.longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressGesture(_:)))
