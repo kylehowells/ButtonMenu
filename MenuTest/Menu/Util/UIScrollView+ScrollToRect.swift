@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-//Note: I realise there's a built in method on UIScrollView for this
-// but it often just doesn't work and I haven't looked into why
+// NOTE: I realise there's a built in method on UIScrollView for this...
+// ...but it often just doesn't work and I haven't looked into why.
 
 @objc public extension UIScrollView {
 	
