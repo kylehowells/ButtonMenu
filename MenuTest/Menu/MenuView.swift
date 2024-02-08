@@ -71,33 +71,20 @@ public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
 		clippingView.clipsToBounds = true
 		self.addSubview(clippingView)
 		
-		/*clippingView.snp.makeConstraints({ make in
-			make.edges.equalToSuperview()
-		})*/
 		clippingView.edgesEqualToSuperview()
 		
 		clippingView.layer.cornerRadius = 8.0
 		
 		clippingView.addSubview(self.effectView)
 		
-		/*self.effectView.snp.makeConstraints({make in
-			make.edges.equalToSuperview()
-		})*/
 		self.effectView.edgesEqualToSuperview()
 		
 		self.effectView.contentView.addSubview(self.tintView)
 		self.effectView.contentView.addSubview(self.titleLabel)
 		self.effectView.contentView.addSubview(self.gestureBarView)
 		
-		/*self.tintView.snp.makeConstraints({ make in
-			make.edges.equalToSuperview()
-		})*/
 		self.tintView.edgesEqualToSuperview()
 		
-		/*self.titleLabel.snp.makeConstraints({ make in
-			make.left.right.equalToSuperview().inset(12)
-			make.centerY.equalToSuperview()
-		})*/
 		if let titleLabelSuperview = self.titleLabel.superview {
 			self.titleLabel.leftAnchor.constraint(equalTo: titleLabelSuperview.leftAnchor, constant: 12).isActive = true
 			self.titleLabel.rightAnchor.constraint(equalTo: titleLabelSuperview.rightAnchor, constant: -12).isActive = true
@@ -107,13 +94,6 @@ public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
 		
 		self.gestureBarView.layer.cornerRadius = 1.0
 		self.gestureBarView.translatesAutoresizingMaskIntoConstraints = false
-		
-		/*self.gestureBarView.snp.makeConstraints({ make in
-			make.centerX.equalToSuperview()
-			make.height.equalTo(2)
-			make.width.equalTo(20)
-			make.bottom.equalToSuperview().inset(3)
-		})*/
 		
 		if let gestureBarViewSuperview = self.gestureBarView.superview {
 			self.gestureBarView.centerXAnchor.constraint(equalTo: gestureBarViewSuperview.centerXAnchor).isActive = true
@@ -248,16 +228,6 @@ public class MenuView: UIView, MenuThemeable, UIGestureRecognizerDelegate {
 		
 		contents.translatesAutoresizingMaskIntoConstraints = false
 		
-		/*contents.snp.makeConstraints({ make in
-			switch self.contentAlignment {
-				case .left:
-					make.top.right.equalToSuperview()
-				case .right:
-					make.top.left.equalToSuperview()
-				case .center:
-					make.top.centerX.equalToSuperview()
-			}
-		})*/
 		switch self.contentAlignment {
 			case .left:
 				contents.topAnchor.constraint(equalTo: self.topAnchor).isActive = true

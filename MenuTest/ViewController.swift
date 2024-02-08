@@ -49,21 +49,12 @@ class ViewController: UIViewController {
 		
 		menu.tintColor = UIColor.black
 		
-		
-		/*menu.snp.makeConstraints({ make in
-			
-			make.center.equalToSuperview()
-			
-			// Menus don't have an intrinsic height
-			make.height.equalTo(40)
-		})*/
-		
 		menu.translatesAutoresizingMaskIntoConstraints = false
+		
 		menu.heightAnchor.constraint(equalToConstant: 40).isActive = true
 		
 		menu.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
 		menu.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-		
 	}
 	
 	override func viewDidLayoutSubviews() {

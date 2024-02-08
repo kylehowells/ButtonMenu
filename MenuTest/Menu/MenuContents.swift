@@ -89,16 +89,10 @@ class MenuContents: UIView {
 		
 		self.addSubview(self.shadowView)
 		
-		/*self.shadowView.snp.makeConstraints({ make in
-			make.edges.equalToSuperview().inset(-20)
-		})*/
 		self.shadowView.edgesEqualToSuperview(padding: -20)
 		
 		self.addSubview(self.effectView)
 		
-		/*self.effectView.snp.makeConstraints({ make in
-			make.edges.equalToSuperview()
-		})*/
 		self.effectView.edgesEqualToSuperview()
 		
 		self.effectView.contentView.addSubview(self.tintView)
@@ -108,27 +102,13 @@ class MenuContents: UIView {
 		self.scrollContainer.addSubview(self.scrollView)
 		self.scrollView.addSubview(self.stackView)
 		
-		/*self.scrollContainer.snp.makeConstraints({ make in
-			make.edges.equalToSuperview()
-		})*/
 		self.scrollContainer.edgesEqualToSuperview()
 		
-		/*self.scrollView.snp.makeConstraints({ make in
-			make.edges.equalToSuperview()
-			make.height.equalTo(maxHeight)
-		})*/
 		self.scrollView.edgesEqualToSuperview()
 		self.scrollView.heightAnchor.constraint(lessThanOrEqualToConstant: maxHeight).isActive = true
 		
-		/*self.tintView.snp.makeConstraints({ make in
-			make.edges.equalToSuperview()
-		})*/
 		self.tintView.edgesEqualToSuperview()
 		
-		/*self.stackView.snp.makeConstraints({ make in
-			make.top.bottom.equalToSuperview()
-			make.left.right.equalTo(self.scrollView.frameLayoutGuide)
-		})*/
 		self.stackView.translatesAutoresizingMaskIntoConstraints = false
 		
 		self.stackView.topAnchor.constraint(equalTo: self.scrollView.topAnchor).isActive = true
@@ -363,10 +343,6 @@ class MenuContents: UIView {
 			return
 		}
 		
-		// We're rendering under the superview, so let's do that
-		/*self.titleLabel.snp.remakeConstraints({ make in
-			make.center.equalTo(superview)
-		})*/
 		self.titleLabel.centerXAnchor.constraint(equalTo: superview.centerXAnchor).isActive = true
 		self.titleLabel.centerYAnchor.constraint(equalTo: superview.centerYAnchor).isActive = true
 		
@@ -375,10 +351,6 @@ class MenuContents: UIView {
 		
 		let insetAdjustment: CGFloat = self.scrollView.contentInset.top + self.scrollView.contentInset.bottom
 		
-		/*self.scrollContainer.snp.remakeConstraints({ make in
-			make.left.bottom.right.equalToSuperview()
-			make.top.equalTo(superview.snp.bottom)
-		})*/
 		if let scrollContainerSuperview = self.scrollContainer.superview {
 			// Remove all constraints
 			self.scrollContainer.removeFromSuperview()
@@ -390,15 +362,6 @@ class MenuContents: UIView {
 			self.scrollContainer.topAnchor.constraint(equalTo: superview.bottomAnchor).isActive = true
 		}
 		
-		/*self.scrollView.snp.remakeConstraints({ make in
-			make.width.greaterThanOrEqualTo(superview.snp.width).offset(100)
-			make.bottom.equalToSuperview()
-			
-			make.height.equalTo(self.stackView).offset(insetAdjustment).priority(.low)
-			make.height.lessThanOrEqualTo(self.maxHeight).priority(.required)
-			
-			make.top.left.right.equalToSuperview()
-		})*/
 		if let scrollViewSuperview = self.scrollView.superview {
 			// Remove all constraints
 			self.scrollView.removeFromSuperview()
